@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Manrope:wght@200..800&family=Public+Sans:ital,wght@0,100..900;1,100..900&family=Yantramanav:wght@100;300;400;500;700;900&display=swap');@import "tailwindcss";
+
+@custom-variant dark-theme ([data-theme="dark"] &);
+@custom-variant light-theme ([data-theme="light"] &);
+
+/* :root {
+  --background: #ffffff;
+  --foreground: #171717;
+  --color-primary: #7367f0;
+} */
+
+@theme {
+  --font-manrope: "Manrope", sans-serif;
+  --font-inter: "Inter", sans-serif;
+  --font-yantramanav: "Yantramanav", sans-serif;
+  --font-public_sans: "Public Sans", sans-serif;}
+
+/* body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+} */
+
+
+/* ── Hero route animation (exact original) ── */
+@keyframes tg25-drive {
+  from { offset-distance: 0%; }
+  to   { offset-distance: 100%; }
+}
+
+@keyframes tg25-dash {
+  100% { stroke-dashoffset: -640; }
+}
+
+.tg25-hero-route {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 220px;
+  opacity: .9;
+  pointer-events: none;
+}
+
+.tg25-route-line {
+  stroke: rgba(0, 184, 217, .5);
+  stroke-width: 2;
+  stroke-dasharray: 7 9;
+  animation: tg25-dash 26s linear infinite;
+}
+
+.tg25-route-truck {
+  fill: #f38634;
+  offset-path: path("M-20,240 C180,180 260,250 420,190 S700,90 940,140");
+  offset-rotate: auto;
+  animation: tg25-drive 22s linear infinite;
+}
+
+.tg25-route-truck circle {
+  fill: #0d1b2a;
+  stroke: #fff;
+  stroke-width: 1.4;
+}
+
+@media (max-width: 767px) {
+  .tg25-hero-route { display: none; }
+}
+
+/* .cms-content .hero-spacer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+}
+
+.cms-content .hero-spacer::after {
+  content: "This is demo";
+  font-size: 40px;
+  font-weight: 800;
+  color: #fff;
+  text-align: center;
+  opacity: 0.9;
+} */
