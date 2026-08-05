@@ -1,5 +1,3 @@
-import { BulkInquiry } from "@/pages/BulkInquiry";
+import BulkInquiry from "@/pages/BulkInquiry";
 
-export default function Page() {
-  return <BulkInquiry />;
-}
+export default BulkInquiry;

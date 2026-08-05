@@ -1,5 +1,3 @@
-import { Contact } from '@/pages/Contact';
+import Contact from '@/pages/Contact';
 
-export default function Page() {
-  return <Contact />;
-}
+export default Contact;

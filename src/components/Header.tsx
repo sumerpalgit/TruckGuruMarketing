@@ -2,61 +2,24 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import type { CmsHeader } from "@/lib/types";
 
-const cities = [
-  "Bangalore",
-  "Hyderabad",
-  "Chennai",
-  "Mumbai",
-  "Delhi",
-  "Ahmedabad",
-  "Pune",
-  "Kolkata",
-  "Kochi",
-  "Visakhapatnam",
-];
+interface HeaderProps {
+  headers?: CmsHeader[];
+}
 
-const transportServices = [
-  "Bangalore",
-  "Hyderabad",
-  "Chennai",
-  "Mumbai",
-  "Delhi",
-  "Pune",
-  "Gurugram",
-  "Vadodara",
-];
-
-const truckTypes = [
-  "Chota Hathi",
-  "Tata Ace",
-  "Tata 407",
-  "Tempo Service",
-  "Container Truck",
-  "Eicher Truck",
-];
-
-const toproute = [
-  "Mumbai to Bangalore",
-  "Delhi to Mumbai",
-  "Bangalore to Hyderabad",
-  "Hyderabad to Delhi",
-  "Pune to Bangalore",
-  "Chennai to Mumbai",
-];
-
-// Config-driven nav so every dropdown is handled the same way
-const navItems = [
-  { label: "Hire Truck", items: cities },
-  { label: "Transport Services", items: transportServices },
-  { label: "Truck Type", items: truckTypes },
-  { label: "Top Routes", items: toproute },
-  { label: "Contact", href: "/contact" },
-];
-
-export default function Header() {
+export default function Header({ headers = [] }: HeaderProps) {
   const [open, setOpen] = useState(false);
-  const [mobileDropdown, setMobileDropdown] = useState(null);
+  const [mobileDropdown, setMobileDropdown] = useState<string | null>(null);
+
+  // Transform CMS headers to navigation items
+  const navItems = headers
+    .map((header) => ({
+      label: header.name,
+      href: header.url,
+      items: header.children?.map((child) => ({ name: child.name, url: child.url })) || [],
+    }))
+    .concat({ label: "Contact", href: "/contact", items: [] });
 
   return (
     <header className="sticky top-0 z-50 bg-white shadow-lg">
@@ -73,7 +36,7 @@ export default function Header() {
         {/* Desktop Navigation */}
         <nav className="hidden lg:flex items-center gap-4 font-[500] text-[16px] !text-[#122036] uppercase tracking-[.06em]">
           {navItems.map((item) =>
-            item.items ? (
+            item.items && item.items.length > 0 ? (
               <div key={item.label} className="relative group">
                 <button className="flex items-center gap-1 py-8 hover:text-orange-500 transition-colors font-inter uppercase">
                   <span className="mt-0.5 transition-transform duration-200 group-hover:rotate-180">
@@ -92,28 +55,28 @@ export default function Header() {
 
                 {/* Dropdown: opens on hover of the whole group, stays open while hovering the panel */}
                 <div
-                  className="absolute left-0 top-full w-56 bg-white 
+                  className="absolute left-0 top-full w-56 bg-white
                              opacity-0 invisible translate-y-1
                              group-hover:opacity-100 group-hover:visible group-hover:translate-y-0
                              transition-all duration-200 py-2 normal-case font-normal
                              list-none m-0 !p-[10px] rounded-[14px] shadow-[0_2px_6px_rgba(13,27,42,0.07),0_14px_34px_rgba(13,27,42,0.10)] min-w-[236px]
                              "
                 >
-                  {item.items.map((entry) => (
-                    <a
-                      key={entry}
-                      href="#"
+                  {item.items.map((child) => (
+                    <Link
+                      key={child.url}
+                      href={child.url}
                       className="block !px-5 !py-1 text-center text-[16px] text-[#122036]! rounded-md  hover:bg-[rgba(244,124,32,0.1)] hover:text-[#F47C20] transition-colors"
                     >
-                      {entry}
-                    </a>
+                      {child.name}
+                    </Link>
                   ))}
                 </div>
               </div>
             ) : (
               <Link
                 key={item.label}
-                href={item.href}
+                href={item.href || "#"}
                 className="hover:text-orange-500 transition-colors !font-[600]"
               >
                 {item.label}
@@ -145,7 +108,7 @@ export default function Header() {
         <div className="lg:hidden bg-white border-t">
           <div className="flex flex-col py-3">
             {navItems.map((item) =>
-              item.items ? (
+              item.items && item.items.length > 0 ? (
                 <div key={item.label} className="border-b border-gray-100">
                   <button
                     onClick={() =>
@@ -167,14 +130,15 @@ export default function Header() {
 
                   {mobileDropdown === item.label && (
                     <div className="bg-gray-50 pb-2">
-                      {item.items.map((entry) => (
-                        <a
-                          key={entry}
-                          href="#"
+                      {item.items.map((child) => (
+                        <Link
+                          key={child.url}
+                          href={child.url}
+                          onClick={() => setOpen(false)}
                           className="block px-8 py-2.5 text-sm text-gray-600 hover:text-orange-500"
                         >
-                          {entry}
-                        </a>
+                          {child.name}
+                        </Link>
                       ))}
                     </div>
                   )}
@@ -182,7 +146,7 @@ export default function Header() {
               ) : (
                 <Link
                   key={item.label}
-                  href={item.href}
+                  href={item.href || "#"}
                   onClick={() => setOpen(false)}
                   className="px-5 py-3 font-semibold text-gray-800 hover:bg-gray-100"
                 >

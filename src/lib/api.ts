@@ -1,4 +1,4 @@
-import type { ApiResponse, CmsPage, CmsPageSlug } from './types';
+import type { ApiResponse, CmsPage, CmsPageSlug, CmsHeader } from './types';
 
 const API_BASE =
   typeof window === 'undefined'
@@ -12,7 +12,10 @@ async function apiFetch<T>(url: string, options?: RequestInit): Promise<T | null
     const res = await fetch(url, options);
     if (!res.ok) return null;
     return res.json() as Promise<T>;
-  } catch {
+  } catch (error) {
+    if (process.env.NODE_ENV === 'development') {
+      console.warn(`[API] Failed to fetch ${url}:`, error instanceof Error ? error.message : String(error));
+    }
     return null;
   }
 }
@@ -32,4 +35,12 @@ export async function getCmsPage(slug: string): Promise<CmsPage | null> {
   );
   if (!res || res.statusCode === 404) return null;
   return res.data ?? null;
+}
+
+export async function getCmsHeaders(): Promise<CmsHeader[]> {
+  const res = await apiFetch<ApiResponse<CmsHeader[]>>(
+    `${PUBLIC}/cms-header/list`,
+    { next: { revalidate: 300, tags: ['cms-headers'] } },
+  );
+  return res?.data ?? [];
 }

@@ -11,8 +11,10 @@ import LiveTrackingSection from "@/components/LiveTrackingSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import CTABannerSection from "@/components/CTABannerSection";
 import BookingTipsSection from "@/components/BookingTipsSection";
+import HireTruckBannerSection from "@/components/HireTruckBannerSection";
+import FAQSection from "@/components/FAQSection";
 
-export const Home = () => {
+export default function Home() {
   return (
     <>
       <HeroSection />
@@ -26,8 +28,10 @@ export const Home = () => {
       <HowItWorksSection />
       <LiveTrackingSection />
       <TestimonialsSection />
+      <HireTruckBannerSection />
+      <FAQSection />
       <CTABannerSection />
       <BookingTipsSection />
     </>
   );
-};
+}

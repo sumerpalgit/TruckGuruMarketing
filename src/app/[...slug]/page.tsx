@@ -47,12 +47,13 @@
 // }
 
 
-import { notFound } from "next/navigation"; 
+import { notFound } from "next/navigation";
 
 import type { Metadata } from "next";
 import parse, { DOMNode } from "html-react-parser";
 import { getCmsPage, getCmsPageSlugs } from "@/lib/api";
 import HeroDemoBadge from "@/components/HeroDemoBadge";
+import { COMPONENT_MAP } from "@/lib/componentMap";
 
 export const revalidate = 60;
 export const dynamicParams = true;
@@ -96,5 +97,24 @@ export default async function CmsPage({
 
   const content = parse(page.content, { replace: replacePlaceholders });
 
-  return <div className="cms-content">{content}</div>;
+  return (
+    <>
+      {page.components && page.components.length > 0 ? (
+        page.components.map((componentKey) => {
+          if (componentKey === "MainContent") {
+            return (
+              <div key="MainContent" className="cms-content section-head max-w-285 mx-auto py-16 px-4">
+                {content}
+              </div>
+            );
+          }
+          const Component = COMPONENT_MAP[componentKey];
+          if (!Component) return null;
+          return <Component key={componentKey} />;
+        })
+      ) : (
+        <div className="cms-content section-head max-w-285 mx-auto p-4 py-16">{content}</div>
+      )}
+    </>
+  );
 }
