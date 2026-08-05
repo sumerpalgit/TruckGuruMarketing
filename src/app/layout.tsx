@@ -1,11 +1,8 @@
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
 import "./globals.css";
-import Header from "@/components/Header";
+import HeaderWrapper from "@/components/HeaderWrapper";
 import Footer from "@/components/Footer";
-import { Home } from "@/pages/Home";
-import { Contact } from "@/pages/Contact";
-import { BulkInquiry } from "@/pages/BulkInquiry";
 
 const geist = Geist({ subsets: ["latin"], variable: "--font-geist" });
 
@@ -25,11 +22,8 @@ export default function RootLayout({
         className="antialiased min-h-screen flex flex-col bg-white"
         suppressHydrationWarning
       >
-        <Header />
+        <HeaderWrapper />
         <main className="flex-1">{children}</main>
-        {/* <Home /> */}
-        {/* <Contact /> */}
-        {/* <BulkInquiry /> */}
         <Footer />
       </body>
     </html>

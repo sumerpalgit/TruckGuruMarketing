@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import OurServicesCard from "@/components/OurServicesCard";
 import CTATalkSection from "@/components/CTATalkSection";
@@ -204,7 +203,7 @@ const FAQS: FaqItem[] = [
   },
 ];
 
-export const FAQ = () => {
+export default function FAQ() {
   const [open, setOpen] = useState<Record<number, boolean>>({});
 
   const allOpen = FAQS.length > 0 && FAQS.every((f) => open[f.n]);
@@ -325,4 +324,4 @@ export const FAQ = () => {
       <CTATalkSection />
     </>
   );
-};
+}

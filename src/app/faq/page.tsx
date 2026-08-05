@@ -1,5 +1,3 @@
-import { FAQ } from "@/pages/FAQ";
+import FAQ from "@/pages/FAQ";
 
-export default function Page() {
-  return <FAQ />;
-}
+export default FAQ;

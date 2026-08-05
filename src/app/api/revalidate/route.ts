@@ -7,10 +7,12 @@ export async function POST(req: NextRequest) {
         return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    const { slug, event } = await req.json();
+    const { slug, event, tag } = await req.json();
 
     if (slug) revalidateTag(`cms-page-${slug}`);
+    if (tag) revalidateTag(tag);
     revalidateTag('cms-slugs');
+    revalidateTag('cms-headers');
 
-    return NextResponse.json({ revalidated: true, slug, event });
+    return NextResponse.json({ revalidated: true, slug, event, tag });
 }

@@ -6,7 +6,7 @@ import OurServicesCard from "@/components/OurServicesCard";
 import CTATalkSection from "@/components/CTATalkSection";
 import { submitContactInquiry } from "@/lib/contact";
 
-export const BulkInquiry = () => {
+export default function BulkInquiry() {
   const [form, setForm] = useState({
     name: "",
     contactNumber: "",
@@ -216,4 +216,4 @@ export const BulkInquiry = () => {
       <CTATalkSection />
     </>
   );
-};
+}

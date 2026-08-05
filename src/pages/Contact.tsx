@@ -6,7 +6,7 @@ import Image from "next/image";
 import { submitContactInquiry } from "@/lib/contact";
 import CTATalkSection from "@/components/CTATalkSection";
 
-export const Contact = () => {
+export default function Contact() {
   const [form, setForm] = useState({
     name: "",
     city: "",
@@ -569,4 +569,4 @@ export const Contact = () => {
       <CTATalkSection />
     </>
   );
-};
+}

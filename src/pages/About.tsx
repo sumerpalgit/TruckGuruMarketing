@@ -98,7 +98,7 @@ const CONTACT_ITEMS = [
   { label: "Website", value: "truckguru.co.in", href: "/" },
 ];
 
-export const About = () => {
+export default function About() {
   const [slide, setSlide] = useState(0);
   const [offset, setOffset] = useState(0);
   const trackRef = useRef<HTMLDivElement>(null);
@@ -516,4 +516,4 @@ export const About = () => {
       <CTATalkSection />
     </>
   );
-};
+}

@@ -26,6 +26,7 @@ export interface CmsPage {
   metaKeywords: string | null;
   createdAt: string;
   updatedAt: string;
+  components?: string[];
 }
 
 export interface CmsPageSlug {
@@ -67,4 +68,20 @@ export interface Place {
     name: string;
     state: { name: string };
   };
+}
+
+export interface CmsHeaderChild {
+  name: string;
+  url: string;
+}
+
+export interface CmsHeader {
+  id: string;
+  name: string;
+  url: string;
+  sortOrder: number;
+  status: 'ACTIVE' | 'INACTIVE';
+  children?: CmsHeaderChild[];
+  createdAt: string;
+  updatedAt: string;
 }

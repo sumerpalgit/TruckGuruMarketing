@@ -82,7 +82,10 @@ function CityInput({ placeholder, dotColor, onSelect }: CityInputProps) {
   }, []);
 
   const handleSelect = (place: Place) => {
-    setQuery(place.city?.name ?? place.name);
+    const cityName = place.city?.name ?? place.name;
+    const stateName = place.city?.state?.name;
+    const displayText = stateName ? `${cityName}, ${stateName}, India` : cityName;
+    setQuery(displayText);
     setResults([]);
     setOpen(false);
     onSelect(place);
@@ -143,10 +146,9 @@ export default function HeroSection() {
       return;
     }
     setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      alert(`Checking fare from ${pickup.name} to ${delivery.name}...`);
-    }, 800);
+    const bookingUrl = `${process.env.NEXT_PUBLIC_BOOKING_URL}/book?sourceId=${pickup.id}&destinationId=${delivery.id}`;
+    window.open(bookingUrl, "_blank");
+    setLoading(false);
   };
 
   return (
