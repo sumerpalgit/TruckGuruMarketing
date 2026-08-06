@@ -38,7 +38,7 @@ export default function Header({ headers = [] }: HeaderProps) {
           {navItems.map((item) =>
             item.items && item.items.length > 0 ? (
               <div key={item.label} className="relative group">
-                <button className="flex items-center gap-1 py-8 hover:text-orange-500 transition-colors font-inter uppercase">
+                <Link href={item.href || "#"} className="flex items-center gap-1 py-8 hover:text-orange-500 transition-colors font-inter uppercase">
                   <span className="mt-0.5 transition-transform duration-200 group-hover:rotate-180">
                     <svg
                       className="w-[.72rem] fill-current"
@@ -51,7 +51,7 @@ export default function Header({ headers = [] }: HeaderProps) {
                   <span className="hover:text-[var(--tg-primary)] !py-1 !font-[600] rounded-2xl hover:bg-[rgba(6,42,99,0.06)] hover:no-underline text-[#122036]">
                     {item.label}
                   </span>
-                </button>
+                </Link>
 
                 {/* Dropdown: opens on hover of the whole group, stays open while hovering the panel */}
                 <div
@@ -87,7 +87,12 @@ export default function Header({ headers = [] }: HeaderProps) {
             <p className="text-[10px] uppercase tracking-widest text-[#44506A]">
               Get In Touch
             </p>
-            <h3 className="text-md font-bold text-[#062A63]">72020 45678</h3>
+            <Link
+              href="tel:+917202045678"
+              className="text-md font-bold text-[#062A63] hover:text-[#F47C20] transition-colors"
+            >
+              72020 45678
+            </Link>
           </div>
         </nav>
 

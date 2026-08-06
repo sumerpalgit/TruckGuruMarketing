@@ -53,9 +53,9 @@ import type { Metadata } from "next";
 import parse, { DOMNode } from "html-react-parser";
 import { getCmsPage, getCmsPageSlugs } from "@/lib/api";
 import HeroDemoBadge from "@/components/HeroDemoBadge";
+import HeroSection from "@/components/HeroSection";
 import { COMPONENT_MAP } from "@/lib/componentMap";
 
-export const revalidate = 60;
 export const dynamicParams = true;
 
 export async function generateStaticParams() {
@@ -99,6 +99,7 @@ export default async function CmsPage({
 
   return (
     <>
+      <HeroSection />
       {page.components && page.components.length > 0 ? (
         page.components.map((componentKey) => {
           if (componentKey === "MainContent") {

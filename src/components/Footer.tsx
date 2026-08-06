@@ -24,14 +24,16 @@ function FooterLink({ href, children }: { href: string; children: ReactNode }) {
   );
 }
 
-function SocialBtn({ children, href = "#" }: { children: ReactNode; href?: string }) {
+function SocialBtn({ children, href = "#", target = "_self" }: { children: ReactNode; href?: string; target?: string }) {
   return (
-    <a
+    <Link
       href={href}
+      target={target}
+      rel="noopener noreferrer"
       className="flex h-9.5 w-9.5 items-center justify-center rounded-xl border border-white/15 bg-[rgba(255,255,255,0.07)] text-white/90 transition-all duration-200 hover:-translate-y-0.75 hover:border-[#F47C20] hover:bg-[#F47C20]"
     >
       {children}
-    </a>
+    </Link>
   );
 }
 
@@ -39,17 +41,17 @@ function SocialBtn({ children, href = "#" }: { children: ReactNode; href?: strin
 
 const QUICK_LINKS = [
   { label: "Home", href: "/" },
-  { label: "About Us", href: "/about-us" },
+  { label: "About Us", href: "/about" },
   { label: "Blog", href: "#" },
   { label: "Payment Terms", href: "#" },
   { label: "Chat Bot Assistant", href: "#" },
 ];
 
 const SERVICES = [
-  { label: "Online Truck Booking", href: "#" },
+  { label: "Online Truck Booking", href: "/truck-booking-online" },
   { label: "Logistics Services", href: "#" },
-  { label: "Transportation Services", href: "#" },
-  { label: "Express Cargo Services", href: "#" },
+  { label: "Transportation Services", href: "/transportation-services" },
+  { label: "Express Cargo Services", href: "/express-cargo-service" },
   { label: "Truck Rental Services", href: "#" },
 ];
 
@@ -141,15 +143,26 @@ export default function Footer() {
           <div>
             <FooterHeading>Contact</FooterHeading>
             <div className="space-y-5 font-inter text-[.9rem] text-[rgba(255,255,255,.62)]">
-              <p className="transition-[color,padding-left] duration-200 hover:pl-1 hover:text-[#F47C20]">
+              <Link
+                href="tel:+917202045678"
+                className="block transition-[color,padding-left] duration-200 hover:pl-1 hover:text-[#F47C20]"
+              >
                 Phone : 72020 45678
-              </p>
-              <p className="transition-[color,padding-left] duration-200 hover:pl-1 hover:text-[#F47C20]">
+              </Link>
+              <Link
+                href="https://wa.me/917202045678"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block transition-[color,padding-left] duration-200 hover:pl-1 hover:text-[#F47C20]"
+              >
                 WhatsApp : 72020 45678
-              </p>
-              <p className="transition-[color,padding-left] duration-200 hover:pl-1 hover:text-[#F47C20]">
+              </Link>
+              <Link
+                href="mailto:cs@truckguru.co.in"
+                className="block transition-[color,padding-left] duration-200 hover:pl-1 hover:text-[#F47C20]"
+              >
                 Email : cs@truckguru.co.in
-              </p>
+              </Link>
             </div>
           </div>
 
@@ -162,8 +175,8 @@ export default function Footer() {
 
           {/* App store buttons */}
           <div className="flex items-center justify-center gap-6 lg:justify-start">
-            <SocialBtn><PlayStoreIcon /></SocialBtn>
-            <SocialBtn><AppStoreIcon /></SocialBtn>
+            <SocialBtn href="https://play.google.com/store/apps/details?id=trckg.truckguru&hl=en" target="_blank"><PlayStoreIcon /></SocialBtn>
+            <SocialBtn href="https://apps.apple.com/us/app/truckguru-truck-hire-india/id1425966954" target="_blank"><AppStoreIcon /></SocialBtn>
           </div>
 
           {/* Copyright */}
@@ -173,10 +186,10 @@ export default function Footer() {
 
           {/* Social links */}
           <div className="flex justify-center gap-6">
-            <SocialBtn><FacebookIcon /></SocialBtn>
-            <SocialBtn><TwitterIcon /></SocialBtn>
-            <SocialBtn><LinkedInIcon /></SocialBtn>
-            <SocialBtn><YouTubeIcon /></SocialBtn>
+            <SocialBtn href="https://www.facebook.com/TruckGuruindia/" target="_blank"><FacebookIcon /></SocialBtn>
+            <SocialBtn href="https://x.com/TruckGuruindia" target="_blank"><TwitterIcon /></SocialBtn>
+            <SocialBtn href="https://www.linkedin.com/company/truckguru.co.in/" target="_blank"><LinkedInIcon /></SocialBtn>
+            <SocialBtn href="https://www.youtube.com/channel/UC6YERsiIbNjnA9FRDNoJ1BA" target="_blank"><YouTubeIcon /></SocialBtn>
           </div>
 
         </div>

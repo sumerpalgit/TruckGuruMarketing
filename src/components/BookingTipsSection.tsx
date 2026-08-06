@@ -1,5 +1,7 @@
 'use client';
 
+import Link from "next/link";
+
 export interface TipItem {
   body: string;
 }
@@ -33,7 +35,7 @@ export default function BookingTipsSection({
   heading = 'Tips for Booking a Truck',
   tips = DEFAULT_TIPS,
   ctaLabel = 'CONTACT NOW',
-  ctaHref = '#',
+  ctaHref = '/contact',
   illustrationSrc = 'https://res.cloudinary.com/dn9tlvamj/image/upload/v1785323786/truckImg_paw6x0.png',
 }: Props) {
   return (
@@ -58,14 +60,14 @@ export default function BookingTipsSection({
               ))}
             </div>
 
-            <a
+            <Link
               href={ctaHref}
               className="mt-5 inline-block rounded-full bg-[#062A63] px-[30px] py-[15px] text-[0.9rem] font-bold uppercase tracking-[0.04em] text-white
                 transition-all hover:-translate-y-[2px] hover:bg-[#0b3d8a] hover:shadow-[0_8px_20px_rgba(6,42,99,0.3)]
                 dark-theme:bg-[#f2751a] dark-theme:hover:bg-[#e06210]"
             >
               {ctaLabel}
-            </a>
+            </Link>
           </div>
 
           {/* Right — illustration */}
