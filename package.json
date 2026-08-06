@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "build:dev": "next build && rm -rf build && mkdir -p build && cp -r .next/standalone/. build/ && cp -r .next/static build/.next/ && cp -r public build/"
+    "build:dev": "next build && rm -rf build && mkdir -p build && cp -r .next/standalone/. build/ && cp -r .next/static build/.next/ && cp -r public build/ && cp .env.local build/"
   },
   "dependencies": {
     "html-react-parser": "^6.1.5",

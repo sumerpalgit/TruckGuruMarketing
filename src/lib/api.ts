@@ -31,7 +31,7 @@ export async function getCmsPageSlugs(): Promise<CmsPageSlug[]> {
 export async function getCmsPage(slug: string): Promise<CmsPage | null> {
   const res = await apiFetch<ApiResponse<CmsPage>>(
     `${PUBLIC}/cms-page/${slug}`,
-    { next: { revalidate: 60, tags: [`cms-page-${slug}`] } },
+    { next: { tags: [`${slug}`] } },
   );
   if (!res || res.statusCode === 404) return null;
   return res.data ?? null;
@@ -40,7 +40,7 @@ export async function getCmsPage(slug: string): Promise<CmsPage | null> {
 export async function getCmsHeaders(): Promise<CmsHeader[]> {
   const res = await apiFetch<ApiResponse<CmsHeader[]>>(
     `${PUBLIC}/cms-header/list`,
-    { next: { revalidate: 300, tags: ['cms-headers'] } },
+    { next: {  tags: ['cms-headers'] } },
   );
   return res?.data ?? [];
 }

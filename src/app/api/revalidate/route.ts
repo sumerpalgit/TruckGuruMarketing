@@ -9,10 +9,7 @@ export async function POST(req: NextRequest) {
 
     const { slug, event, tag } = await req.json();
 
-    if (slug) revalidateTag(`cms-page-${slug}`);
     if (tag) revalidateTag(tag);
-    revalidateTag('cms-slugs');
-    revalidateTag('cms-headers');
 
     return NextResponse.json({ revalidated: true, slug, event, tag });
 }
