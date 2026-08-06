@@ -2,7 +2,7 @@ import type { ApiResponse, CmsPage, CmsPageSlug, CmsHeader } from './types';
 
 const API_BASE =
   typeof window === 'undefined'
-    ? (process.env.API_URL ?? 'http://localhost:3000') + '/api/v1'
+    ? (process.env.API_URL ?? 'https://truck-guru-api.testdevurl.com') + '/api/v1'
     : '/api/v1';
 
 const PUBLIC = `${API_BASE}/public`;
@@ -23,7 +23,7 @@ async function apiFetch<T>(url: string, options?: RequestInit): Promise<T | null
 export async function getCmsPageSlugs(): Promise<CmsPageSlug[]> {
   const res = await apiFetch<ApiResponse<CmsPageSlug[]>>(
     `${PUBLIC}/cms-page/slugs`,
-    { next: { revalidate: 300, tags: ['cms-slugs'] } },
+    { next: { tags: ['cms-slugs'] } },
   );
   return res?.data ?? [];
 }

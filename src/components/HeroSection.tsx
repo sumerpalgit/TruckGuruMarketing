@@ -55,24 +55,8 @@ function CityInput({ placeholder, dotColor, onSelect }: CityInputProps) {
       setLoading(true);
       try {
         const places = await searchPlaces(val);
-        const lower = val.toLowerCase().trim();
-
-        // keep only results where the city name matches the query
-        const filtered = places.filter((p) =>
-          p.city?.name?.toLowerCase().includes(lower),
-        );
-
-        // deduplicate by city name
-        const seen = new Set<string>();
-        const unique = filtered.filter((p) => {
-          const key = (p.city?.name ?? p.name).toLowerCase();
-          if (seen.has(key)) return false;
-          seen.add(key);
-          return true;
-        });
-
-        setResults(unique);
-        setOpen(unique.length > 0);
+        setResults(places);
+        setOpen(places.length > 0);
       } catch {
         setResults([]);
       } finally {

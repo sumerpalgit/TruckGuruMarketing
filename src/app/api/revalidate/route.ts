@@ -9,7 +9,14 @@ export async function POST(req: NextRequest) {
 
     const { slug, event, tag } = await req.json();
 
-    if (tag) revalidateTag(tag);
+    if (tag) {
+        revalidateTag(tag);
+        // When a CMS page changes, also revalidate the slug list
+        // so new/deleted pages appear immediately in generateStaticParams()
+        if (tag !== 'cms-headers') {
+            revalidateTag('cms-slugs');
+        }
+    }
 
     return NextResponse.json({ revalidated: true, slug, event, tag });
 }
