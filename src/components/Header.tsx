@@ -19,6 +19,7 @@ export default function Header({ headers = [] }: HeaderProps) {
       href: header.url,
       items: header.children?.map((child) => ({ name: child.name, url: child.url })) || [],
     }))
+    .concat({ label: "Blog", href: "/blog", items: [] })
     .concat({ label: "Contact", href: "/contact", items: [] });
 
   return (
