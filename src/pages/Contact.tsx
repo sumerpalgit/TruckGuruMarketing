@@ -42,8 +42,10 @@ export default function Contact() {
     setSubmitting(false);
     if (result.success) {
       setSent(true);
+      setForm({ name: "", city: "", contactNumber: "", email: "", message: "" });
+      setTimeout(() => setSent(false), 4000);
     } else {
-      setError(result.message);
+      setError(result.message || "Failed to submit enquiry. Please try again.");
     }
   };
 

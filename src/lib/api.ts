@@ -1,4 +1,4 @@
-import type { ApiResponse, CmsPage, CmsPageSlug, CmsHeader } from './types';
+import type { ApiResponse, CmsPage, CmsPageSlug, CmsHeader, BlogPost, BlogDetail, BlogPagination, BlogListApiResponse, BlogDetailApiResponse } from './types';
 
 const API_BASE =
   typeof window === 'undefined'
@@ -43,4 +43,25 @@ export async function getCmsHeaders(): Promise<CmsHeader[]> {
     { next: {  tags: ['cms-headers'] } },
   );
   return res?.data ?? [];
+}
+
+export async function getBlogList(page = 1, perPage = 12, search?: string): Promise<{ blogs: BlogPost[]; pagination: BlogPagination }> {
+  const searchParam = search ? `&search=${encodeURIComponent(search)}` : '';
+  const res = await apiFetch<BlogListApiResponse>(
+    `${PUBLIC}/blog/list?page=${page}&perPage=${perPage}${searchParam}`,
+    { next: { tags: ['blogs'] } },
+  );
+  return {
+    blogs: res?.data ?? [],
+    pagination: res?._metadata?.pagination ?? { page: 1, perPage: 12, total: 0, totalPage: 1 },
+  };
+}
+
+export async function getBlogBySlug(slug: string): Promise<BlogDetail | null> {
+  const res = await apiFetch<BlogDetailApiResponse>(
+    `${PUBLIC}/blog/${slug}`,
+    { next: { tags: ['blog'] } },
+  );
+  if (!res || res.statusCode === 404) return null;
+  return res.data ?? null;
 }

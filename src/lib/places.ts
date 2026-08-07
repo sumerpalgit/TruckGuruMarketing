@@ -10,7 +10,7 @@ const PLACES_HEADERS = {
 };
 
 export async function searchPlaces(query: string): Promise<Place[]> {
-  const url = `${PLACES_API}?search=${encodeURIComponent(query)}&perPage=10&page=1`;
+  const url = `${PLACES_API}?search=${encodeURIComponent(query)}&perPage=10&page=1&orderBy=createdAt&orderDirection=DESC`;
   const res = await fetch(url, { headers: PLACES_HEADERS });
   const json = await res.json();
   const places: Place[] = json.data ?? [];

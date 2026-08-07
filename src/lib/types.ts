@@ -85,3 +85,40 @@ export interface CmsHeader {
   createdAt: string;
   updatedAt: string;
 }
+
+export interface BlogPagination {
+  page: number;
+  perPage: number;
+  total: number;
+  totalPage: number;
+}
+
+export interface BlogPost {
+  id: string;
+  title: string;
+  slug: string;
+  authorName: string;
+  authorPhoto: string | null;
+  authorPhotoUrl: string | null;
+  image: string | null;
+  imageUrl: string | null;
+  publishedDate: string;
+  createdAt: string;
+  description?: string;
+}
+
+export interface BlogDetail extends BlogPost {
+  description: string;
+  updatedAt: string;
+}
+
+export interface BlogListApiResponse {
+  statusCode: number;
+  data: BlogPost[];
+  _metadata: { pagination: BlogPagination };
+}
+
+export interface BlogDetailApiResponse {
+  statusCode: number;
+  data: BlogDetail;
+}
