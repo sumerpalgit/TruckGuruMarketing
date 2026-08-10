@@ -75,6 +75,17 @@ function BlogPagination({
 
   return (
     <div className="mt-12 flex flex-wrap items-center justify-center gap-2">
+      <Link
+        href={currentPage > 1 ? `/blog?page=${currentPage - 1}` : "#"}
+        aria-disabled={currentPage === 1}
+        className={`flex h-10 items-center gap-1.5 rounded-lg px-4 text-sm font-bold transition-colors ${
+          currentPage === 1
+            ? "pointer-events-none bg-[#0d1b34]/30 text-white/40"
+            : "bg-[#0d1b34] text-white hover:bg-[#162944]"
+        }`}
+      >
+        <span className="text-[#f38634]">←</span> PREV
+      </Link>
       {pages.map((p, i) =>
         p === "..." ? (
           <span
@@ -124,10 +135,8 @@ export default function BlogContent({ blogs, pagination, recentPosts, currentPag
   const searchParams = useSearchParams();
   const search = searchParams?.get("search") ?? "";
 
-  const handleSearch = (e: React.SyntheticEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const formData = new FormData(e.currentTarget as HTMLFormElement);
-    const searchTerm = formData.get("search")?.toString().trim() || "";
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const searchTerm = e.target.value.trim();
     if (searchTerm) {
       router.push(`/blog?search=${encodeURIComponent(searchTerm)}`);
     } else {
@@ -176,25 +185,21 @@ export default function BlogContent({ blogs, pagination, recentPosts, currentPag
           <p className="text-[#a9b8d2] text-[17px] mb-8 max-w-lg mx-auto">
             Truck Booking Tips, Transport Guides & Logistics Insights
           </p>
-          <form
-            className="flex gap-[10px] mt-[30px] mx-auto max-w-[520px]"
-            onSubmit={handleSearch}
-          >
+          <div className="flex gap-[10px] mt-[30px] mx-auto max-w-[520px]">
             <input
               type="search"
-              name="search"
               placeholder="Search"
               aria-label="Search"
-              defaultValue={search}
+              value={search}
+              onChange={handleSearchChange}
               className="flex-1 bg-white/[0.07] border border-white/[0.18] rounded-xl px-[18px] py-[14px] text-[15px] text-white outline-none"
             />
             <button
-              type="submit"
               className="bg-[#f38634] text-white text-[13px] font-extrabold tracking-[0.08em] px-[26px] rounded-xl cursor-pointer border-none"
             >
               SEARCH
             </button>
-          </form>
+          </div>
         </div>
       </section>
 

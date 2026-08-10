@@ -4,6 +4,9 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 
+export const revalidate = false;
+export const dynamicParams = true;
+
 const API_URL = process.env.API_URL ?? "https://truck-guru-api.testdevurl.com";
 
 function estimateReadTime(html: string): number {

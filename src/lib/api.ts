@@ -23,7 +23,7 @@ async function apiFetch<T>(url: string, options?: RequestInit): Promise<T | null
 export async function getCmsPageSlugs(): Promise<CmsPageSlug[]> {
   const res = await apiFetch<ApiResponse<CmsPageSlug[]>>(
     `${PUBLIC}/cms-page/slugs`,
-    { next: { tags: ['cms-slugs'] } },
+    { next: { tags: ['cms-slugs'], revalidate: false } },
   );
   return res?.data ?? [];
 }
@@ -31,7 +31,7 @@ export async function getCmsPageSlugs(): Promise<CmsPageSlug[]> {
 export async function getCmsPage(slug: string): Promise<CmsPage | null> {
   const res = await apiFetch<ApiResponse<CmsPage>>(
     `${PUBLIC}/cms-page/${slug}`,
-    { next: { tags: [`${slug}`] } },
+    { next: { tags: [`${slug}`], revalidate: false } },
   );
   if (!res || res.statusCode === 404) return null;
   return res.data ?? null;
@@ -40,7 +40,7 @@ export async function getCmsPage(slug: string): Promise<CmsPage | null> {
 export async function getCmsHeaders(): Promise<CmsHeader[]> {
   const res = await apiFetch<ApiResponse<CmsHeader[]>>(
     `${PUBLIC}/cms-header/list`,
-    { next: {  tags: ['cms-headers'] } },
+    { next: { tags: ['cms-headers'], revalidate: false } },
   );
   return res?.data ?? [];
 }
@@ -49,7 +49,7 @@ export async function getBlogList(page = 1, perPage = 12, search?: string): Prom
   const searchParam = search ? `&search=${encodeURIComponent(search)}` : '';
   const res = await apiFetch<BlogListApiResponse>(
     `${PUBLIC}/blog/list?page=${page}&perPage=${perPage}${searchParam}`,
-    { next: { tags: ['blogs'] } },
+    { next: { tags: ['blogs'], revalidate: false } },
   );
   return {
     blogs: res?.data ?? [],
@@ -60,8 +60,16 @@ export async function getBlogList(page = 1, perPage = 12, search?: string): Prom
 export async function getBlogBySlug(slug: string): Promise<BlogDetail | null> {
   const res = await apiFetch<BlogDetailApiResponse>(
     `${PUBLIC}/blog/${slug}`,
-    { next: { tags: ['blog'] } },
+    { next: { tags: [slug], revalidate: false } },
   );
   if (!res || res.statusCode === 404) return null;
   return res.data ?? null;
+}
+
+export async function getBlogSlugs(): Promise<{ slug: string }[]> {
+  const res = await apiFetch<ApiResponse<{ slug: string }[]>>(
+    `${PUBLIC}/blog/slugs`,
+    { next: { tags: ['blogs'], revalidate: false } },
+  );
+  return res?.data ?? [];
 }

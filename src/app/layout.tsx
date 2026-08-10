@@ -4,6 +4,8 @@ import "./globals.css";
 import HeaderWrapper from "@/components/HeaderWrapper";
 import Footer from "@/components/Footer";
 
+export const revalidate = false;
+
 const geist = Geist({ subsets: ["latin"], variable: "--font-geist" });
 
 export const metadata: Metadata = {
