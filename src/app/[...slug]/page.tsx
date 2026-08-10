@@ -56,6 +56,9 @@ import HeroDemoBadge from "@/components/HeroDemoBadge";
 import HeroSection from "@/components/HeroSection";
 import { COMPONENT_MAP } from "@/lib/componentMap";
 
+export const revalidate = false;
+export const dynamicParams = true;
+
 export async function generateMetadata({
   params,
 }: {
