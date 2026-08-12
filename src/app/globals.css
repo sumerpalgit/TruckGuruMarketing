@@ -100,6 +100,15 @@
     line-height:1.85 !important;
 }
 
+.section-head h1{
+    font-size:1.9rem !important;
+    font-weight:800 !important;
+    color:#02223F !important;
+    margin:1.8rem 0 .6rem !important;
+    padding-bottom:8px !important;
+    border-bottom:2px solid #F38634 !important;
+}
+
 /* H tags — safe to style, only appear as block elements */
 .section-head h2{
     font-size:1.4rem !important;
@@ -242,12 +251,132 @@
     background:#fff3eb !important;
 }
 
-.section-head table tr:hover:first-child td{
+/* .section-head table th:hover{
     background: rgb(6, 75, 118) !important;
+} */
+
+.section-head table thead tr:hover,
+.section-head table thead tr:hover td {
+    background-color: #064b75 !important;
 }
 
 .section-head table tr:last-child td{
     border-bottom:none !important;
+}
+
+
+/* =========================================
+   TG TABLE - EXACT DESIGN
+   Add class="tg-table" to the table
+    ex: <table cellspacing="0" class="tg-table" style="border-collapse:collapse; border:none; width:100.0%">
+   ========================================= */
+
+.section-head table.tg-table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+    border-spacing: 0 !important;
+    border: 1px solid #cccccc !important;
+    margin: 1rem 0 1.4rem !important;
+    font-size: 16px !important;
+}
+
+/* HEADER */
+.section-head table.tg-table thead th,
+.section-head table.tg-table thead td {
+    background: #064b76 !important;
+    background-image: none !important;
+
+    color: #ffffff !important;
+
+    padding: 10px 14px !important;
+
+    font-family: Verdana, Geneva, sans-serif !important;
+    font-size: 16px !important;
+    font-weight: 700 !important;
+
+    text-align: left !important;
+    vertical-align: top !important;
+
+    border-top: 1px solid #cccccc !important;
+    border-bottom: 1px solid #cccccc !important;
+    border-left: 1px solid #cccccc !important;
+    border-right: 1px solid #cccccc !important;
+}
+
+/* HEADER TEXT */
+.section-head table.tg-table thead th *,
+.section-head table.tg-table thead td * {
+    color: #ffffff !important;
+}
+
+/* HEADER HOVER - KEEP ORIGINAL BLUE */
+.section-head table.tg-table thead tr:hover th,
+.section-head table.tg-table thead tr:hover td {
+    background: #064b76 !important;
+    background-image: none !important;
+    color: #ffffff !important;
+}
+
+/* BODY CELLS */
+.section-head table.tg-table tbody td,
+.section-head table.tg-table tbody th {
+    background: #ffffff !important;
+
+    color: #222222 !important;
+
+    padding: 10px 14px !important;
+
+    font-family: Verdana, Geneva, sans-serif !important;
+    font-size: 16px !important;
+
+    vertical-align: top !important;
+
+    border-top: none !important;
+    border-bottom: 1px solid #cccccc !important;
+    border-left: 1px solid #cccccc !important;
+    border-right: 1px solid #cccccc !important;
+}
+
+/* BODY TEXT */
+.section-head table.tg-table tbody td *,
+.section-head table.tg-table tbody th * {
+    color: #222222 !important;
+}
+
+/* BODY HOVER */
+.section-head table.tg-table tbody tr:hover td,
+.section-head table.tg-table tbody tr:hover th {
+    background: #fff3eb !important;
+}
+
+/* KEEP COLUMN BORDERS ON HOVER */
+.section-head table.tg-table tbody tr:hover td {
+    border-left: 1px solid #cccccc !important;
+    border-right: 1px solid #cccccc !important;
+    border-bottom: 1px solid #cccccc !important;
+}
+
+/* FIRST COLUMN */
+.section-head table.tg-table th:first-child,
+.section-head table.tg-table td:first-child {
+    border-left: 1px solid #cccccc !important;
+}
+
+/* LAST COLUMN */
+.section-head table.tg-table th:last-child,
+.section-head table.tg-table td:last-child {
+    border-right: 1px solid #cccccc !important;
+}
+
+/* LAST ROW */
+.section-head table.tg-table tbody tr:last-child td {
+    border-bottom: 1px solid #cccccc !important;
+}
+
+/* Remove paragraph spacing inside table */
+.section-head table.tg-table p {
+    margin: 0 !important;
+    padding: 0 !important;
 }
 
 /* Blockquote */
@@ -263,6 +392,9 @@
 
 /* Mobile */
 @media (max-width:767px){
+    .section-head h1{
+       font-size:1.25rem !important;
+     }
     .section-head{
         font-size:.925rem !important;
     }
